@@ -9,11 +9,14 @@ Vue.use(VueRouter);
 
 import Home from './components/Home.vue';
 import Test from './components/Test.vue';
+import Register from './components/Register.vue';
+import Login from './components/Login.vue';
+import Dashboard from './components/Dashboard.vue';
 
 
 
 
- const routes = [
+const routes = [
     {
         path: '/',
         component: Home,
@@ -23,6 +26,28 @@ import Test from './components/Test.vue';
         path: '/test',
         component: Test,
         name: 'Test'
+    },
+    {
+        path: '/register',
+        component: Register,
+        name: 'Register'
+    },
+    {
+        path: '/login',
+        component: Login,
+        name: 'Login'
+    },
+    {
+        path:'/dashboard',
+        component: Dashboard,
+        name: 'Dashboard',
+        beforeEnter: (to, from, next) => {
+            axios.get('/api/authentificated').then(()=>{
+                next()
+            }).catch(()=>{
+                return next({name: 'Login'})
+            })
+        }
     },
     
 ]
