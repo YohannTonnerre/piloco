@@ -27,7 +27,7 @@
             </tr>
             </tbody>
         </table>
-        <router-link :to="{name: 'NewOtter'}">Nouvelle loutre</router-link>
+        <router-link :to="{name: 'NewOtter'}">Nouveaux picolos</router-link>
     </section>
 </template>
 
@@ -36,14 +36,14 @@ export default {
     data(){
         return{
             user: { type: Object, default: () => ({}) },
-            blagues: []
+            picolos: []
         }
     },
     created() {
         
         axios.get('/api/dashboard')
             .then(response => {
-                this.blagues = response.data;
+                this.picolos = response.data;
             });
     },
 

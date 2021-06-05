@@ -1887,14 +1887,14 @@ __webpack_require__.r(__webpack_exports__);
           return {};
         }
       },
-      blagues: []
+      picolos: []
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get('/api/dashboard').then(function (response) {
-      _this.blagues = response.data;
+      _this.picolos = response.data;
     });
   },
   methods: {
@@ -38041,7 +38041,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("router-link", { attrs: { to: { name: "NewOtter" } } }, [
-        _vm._v("Nouvelle loutre")
+        _vm._v("Nouveaux picolos")
       ])
     ],
     1

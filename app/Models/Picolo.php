@@ -13,5 +13,5 @@ class Picolo extends Model
         'mode',
         'name',
         'verre',
-    ]
+    ];
 }
