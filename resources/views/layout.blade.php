@@ -10,12 +10,10 @@
     </head>
     <body>
         <div id="app">
-            <router-link to="/">
+            {{-- <router-link to="/">
                 <p>Home</p>
-            </router-link>
-            <router-link to="/test">
-                <p>test</p>
-            </router-link>
+            </router-link> --}}
+            
                 
 
             

@@ -13,7 +13,7 @@ class CreatePicolosTable extends Migration
      */
     public function up()
     {
-        Schema::create('picolos', function (Blueprint $table) {
+        Schema::create('pilocos', function (Blueprint $table) {
             $table->id();
             $table->string('mode');
             $table->text('name');

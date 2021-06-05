@@ -8,26 +8,28 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Titre</th>
-                <th>Description</th>
+                <th>mode</th>
+                <th>phrase</th>
+                <th>nombres gorgées</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="picolo in picolos" :key="picolo.id">
-                <td>{{ picolo.id }}</td>
-                <td>{{ picolo.name }}</td>
-                <td>{{ picolo.verre }}</td>
+            <tr v-for="piloco in pilocos" :key="piloco.id">
+                <td>{{ piloco.id }}</td>
+                <td>{{ piloco.mode }}</td>
+                <td>{{ piloco.name }}</td>
+                <td>{{ piloco.verre }}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <router-link :to="{name: 'EditPicolo', params: { id: picolo.id }}" class="btn btn-success">Edit</router-link>
-                        <button class="btn btn-danger" @click="deletePicolo(picolo.id)">Delete</button>
+                        <router-link :to="{name: 'EditPicolo', params: { id: piloco.id }}" class="btn btn-success">Edit</router-link>
+                        <button class="btn btn-danger" @click="deletePicolo(piloco.id)">Delete</button>
                     </div>
                 </td>
             </tr>
             </tbody>
         </table>
-        <router-link :to="{name: 'NewOtter'}">Nouveaux picolos</router-link>
+        <router-link :to="{name: 'NewPiloco'}">Nouveaux pilocos</router-link>
     </section>
 </template>
 
@@ -36,21 +38,21 @@ export default {
     data(){
         return{
             user: { type: Object, default: () => ({}) },
-            picolos: []
+            pilocos: []
         }
     },
     created() {
         
         axios.get('/api/dashboard')
             .then(response => {
-                this.picolos = response.data;
+                this.pilocos = response.data;
             });
     },
 
     methods:{
         logout(){
             axios.post('/api/logout').then(()=>{
-                this.$router.push({ name: 'Accueil'})
+                this.$router.push({ name: 'Home'})
             })
         },
         deletePicolo(id){

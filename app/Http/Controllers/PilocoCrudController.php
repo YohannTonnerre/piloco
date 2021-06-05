@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Picolo;
+use App\Models\Piloco;
 use Illuminate\Support\Facades\Auth;
 
-class PicoloCrudController extends Controller
+class PilocoCrudController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class PicoloCrudController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $picolos = Picolo::where('name','=', $user->name)->orderBy('created_at', 'desc')->get();
-        return $picolos;
+        $pilocos = Piloco::orderBy('created_at', 'desc')->get();
+        return $pilocos;
     }
 
     /**
@@ -38,7 +38,13 @@ class PicoloCrudController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $piloco = new Piloco([
+            'mode' => $request->input('mode'),
+            'name' => $request->input('name'),
+            'verre' => $request->input('verre')
+        ]);
+        $piloco->save();
+        return response()->json('Product created!');
     }
 
     /**

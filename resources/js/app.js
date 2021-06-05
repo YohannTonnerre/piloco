@@ -12,6 +12,7 @@ import Test from './components/Test.vue';
 import Register from './components/Register.vue';
 import Login from './components/Login.vue';
 import Dashboard from './components/Dashboard.vue';
+import NewPiloco from './components/NewPiloco.vue';
 
 
 
@@ -48,6 +49,11 @@ const routes = [
                 return next({name: 'Login'})
             })
         }
+    },
+    {
+        path: '/new-piloco',
+        component: NewPiloco,
+        name: 'NewPiloco'
     },
     
 ]

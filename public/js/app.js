@@ -1878,6 +1878,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1887,14 +1889,14 @@ __webpack_require__.r(__webpack_exports__);
           return {};
         }
       },
-      picolos: []
+      pilocos: []
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get('/api/dashboard').then(function (response) {
-      _this.picolos = response.data;
+      _this.pilocos = response.data;
     });
   },
   methods: {
@@ -1903,7 +1905,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/logout').then(function () {
         _this2.$router.push({
-          name: 'Accueil'
+          name: 'Home'
         });
       });
     },
@@ -1941,6 +1943,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2007,6 +2023,81 @@ __webpack_require__.r(__webpack_exports__);
         _this.errors = error.response.data.errors;
       });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NewPiloco.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NewPiloco.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      user: {
+        type: Object,
+        "default": function _default() {
+          return {};
+        }
+      },
+      form: {
+        mode: '',
+        name: '',
+        verre: ''
+      },
+      errors: []
+    };
+  },
+  methods: {
+    pushPiloco: function pushPiloco() {
+      var _this = this;
+
+      axios.post('/api/piloco/add', this.form).then(function () {
+        _this.$router.push({
+          name: 'Dashboard'
+        });
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
+      });
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    axios.get('/api/user').then(function (res) {
+      _this2.user = res.data;
+    });
   }
 });
 
@@ -2112,11 +2203,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Register_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Register.vue */ "./resources/js/components/Register.vue");
 /* harmony import */ var _components_Login_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Login.vue */ "./resources/js/components/Login.vue");
 /* harmony import */ var _components_Dashboard_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue");
+/* harmony import */ var _components_NewPiloco_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/NewPiloco.vue */ "./resources/js/components/NewPiloco.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_1__.default);
+
 
 
 
@@ -2151,6 +2244,10 @@ var routes = [{
       });
     });
   }
+}, {
+  path: '/new-piloco',
+  component: _components_NewPiloco_vue__WEBPACK_IMPORTED_MODULE_7__.default,
+  name: 'NewPiloco'
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__.default({
   routes: routes
@@ -37706,6 +37803,45 @@ component.options.__file = "resources/js/components/Login.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/NewPiloco.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/NewPiloco.vue ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _NewPiloco_vue_vue_type_template_id_fb0f7ae6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewPiloco.vue?vue&type=template&id=fb0f7ae6& */ "./resources/js/components/NewPiloco.vue?vue&type=template&id=fb0f7ae6&");
+/* harmony import */ var _NewPiloco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewPiloco.vue?vue&type=script&lang=js& */ "./resources/js/components/NewPiloco.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _NewPiloco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _NewPiloco_vue_vue_type_template_id_fb0f7ae6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _NewPiloco_vue_vue_type_template_id_fb0f7ae6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/NewPiloco.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Register.vue":
 /*!**********************************************!*\
   !*** ./resources/js/components/Register.vue ***!
@@ -37832,6 +37968,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/NewPiloco.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/NewPiloco.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPiloco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NewPiloco.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NewPiloco.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPiloco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Register.vue?vue&type=script&lang=js&":
 /*!***********************************************************************!*\
   !*** ./resources/js/components/Register.vue?vue&type=script&lang=js& ***!
@@ -37915,6 +38067,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/NewPiloco.vue?vue&type=template&id=fb0f7ae6&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/NewPiloco.vue?vue&type=template&id=fb0f7ae6& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPiloco_vue_vue_type_template_id_fb0f7ae6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPiloco_vue_vue_type_template_id_fb0f7ae6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPiloco_vue_vue_type_template_id_fb0f7ae6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NewPiloco.vue?vue&type=template&id=fb0f7ae6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NewPiloco.vue?vue&type=template&id=fb0f7ae6&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Register.vue?vue&type=template&id=97358ae4&":
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/Register.vue?vue&type=template&id=97358ae4& ***!
@@ -37994,13 +38163,15 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.picolos, function(picolo) {
-            return _c("tr", { key: picolo.id }, [
-              _c("td", [_vm._v(_vm._s(picolo.id))]),
+          _vm._l(_vm.pilocos, function(piloco) {
+            return _c("tr", { key: piloco.id }, [
+              _c("td", [_vm._v(_vm._s(piloco.id))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(picolo.name))]),
+              _c("td", [_vm._v(_vm._s(piloco.mode))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(picolo.verre))]),
+              _c("td", [_vm._v(_vm._s(piloco.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(piloco.verre))]),
               _vm._v(" "),
               _c("td", [
                 _c(
@@ -38012,7 +38183,7 @@ var render = function() {
                       {
                         staticClass: "btn btn-success",
                         attrs: {
-                          to: { name: "EditPicolo", params: { id: picolo.id } }
+                          to: { name: "EditPicolo", params: { id: piloco.id } }
                         }
                       },
                       [_vm._v("Edit")]
@@ -38024,7 +38195,7 @@ var render = function() {
                         staticClass: "btn btn-danger",
                         on: {
                           click: function($event) {
-                            return _vm.deletePicolo(picolo.id)
+                            return _vm.deletePicolo(piloco.id)
                           }
                         }
                       },
@@ -38040,8 +38211,8 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "NewOtter" } } }, [
-        _vm._v("Nouveaux picolos")
+      _c("router-link", { attrs: { to: { name: "NewPiloco" } } }, [
+        _vm._v("Nouveaux pilocos")
       ])
     ],
     1
@@ -38056,9 +38227,11 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Titre")]),
+        _c("th", [_vm._v("mode")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
+        _c("th", [_vm._v("phrase")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("nombres gorgées")]),
         _vm._v(" "),
         _c("th", [_vm._v("Actions")])
       ])
@@ -38087,7 +38260,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Home")])
+  return _c(
+    "section",
+    { staticClass: "home-container" },
+    [
+      _c("h1", [_vm._v("Piloco")]),
+      _vm._v(" "),
+      _c(
+        "svg",
+        {
+          staticClass: "wave",
+          attrs: {
+            xmlns: "http://www.w3.org/2000/svg",
+            viewBox: "0 0 1440 320"
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              fill: "#FFDB91",
+              "fill-opacity": "1",
+              d:
+                "M0,96L60,128C120,160,240,224,360,250.7C480,277,600,267,720,218.7C840,171,960,85,1080,48C1200,11,1320,21,1380,26.7L1440,32L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "svg",
+        {
+          staticClass: "wave",
+          attrs: {
+            xmlns: "http://www.w3.org/2000/svg",
+            viewBox: "0 0 1440 320"
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              fill: "#EFBE5B",
+              "fill-opacity": "1",
+              d:
+                "M0,128L60,128C120,128,240,128,360,112C480,96,600,64,720,48C840,32,960,32,1080,53.3C1200,75,1320,117,1380,138.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c("router-link", { staticClass: "jouer-link", attrs: { to: "/test" } }, [
+        _vm._v("\n        Jouer\n    ")
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38208,6 +38434,134 @@ var render = function() {
           attrs: { type: "submit", value: "Submit" }
         })
       ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NewPiloco.vue?vue&type=template&id=fb0f7ae6&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NewPiloco.vue?vue&type=template&id=fb0f7ae6& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "auth-container" }, [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.pushPiloco.apply(null, arguments)
+          }
+        }
+      },
+      [
+        _vm._l(_vm.errors, function(error) {
+          return _c("p", { key: error }, [
+            _vm._v("\n            " + _vm._s(error) + "\n        ")
+          ])
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "mode" } }, [_vm._v("mode")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.mode,
+                expression: "form.mode"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "mode" },
+            domProps: { value: _vm.form.mode },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "mode", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.name,
+                expression: "form.name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "name" },
+            domProps: { value: _vm.form.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "name", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "verre" } }, [_vm._v("verre")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.verre,
+                expression: "form.verre"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "verre" },
+            domProps: { value: _vm.form.verre },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "verre", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", value: "Creer la loutre" }
+        })
+      ],
+      2
     )
   ])
 }
