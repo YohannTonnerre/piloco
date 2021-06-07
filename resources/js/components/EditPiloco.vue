@@ -1,20 +1,18 @@
 <template>
     <div class="auth-container">
-        <form @submit.prevent="pushPiloco">
-            <p v-for="error in errors" :key="error">
-                {{error}}
-            </p>
+        <form @submit.prevent="updatePiloco">
+
             <div class="form-group">
                 <label for="mode">mode</label>
-                <input type="text" class="form-control" placeholder="mode" v-model="form.mode">
+                <input type="text" class="form-control" placeholder="mode" v-model="piloco.mode">
             </div>
             <div class="form-group">
                 <label for="name">Phrase</label>
-                <input type="text" class="form-control" placeholder="name" v-model="form.name">
+                <input type="text" class="form-control" placeholder="name" v-model="piloco.name">
             </div>
             <div class="form-group">
                 <label for="verre">Nombre de gorgées</label>
-                <input type="text" class="form-control" placeholder="verre" v-model="form.verre">
+                <input type="text" class="form-control" placeholder="verre" v-model="piloco.verre">
             </div> 
             <input type="submit" value="Creer la loutre" class="btn btn-primary"/>
         </form>
@@ -26,25 +24,17 @@ export default {
     data(){
         return{
             
-            user: {
-                type: Object, default: () => ({}) 
-            },
-            
-            form:{
-                mode:'',
-                name:'' ,
-                verre:''
+            piloco:{
 
-            },
-            errors:[]
+            }
         }
         
     },
     
     methods: {
         
-        pushPiloco(){
-            axios.post('/api/piloco/add',this.form).then(()=>{
+        updatePiloco(){
+            axios.post(`/api/piloco/update/${this.$route.params.id}`, this.piloco).then(()=>{
                 this.$router.push({name: 'Dashboard'});
             }).catch((error) => {
                 this.errors = error.response.data.errors;
@@ -52,8 +42,8 @@ export default {
         }
     },
     created(){
-        axios.get('/api/user').then((res)=>{
-            this.user = res.data
+        axios.get(`/api/piloco/edit/${this.$route.params.id}`).then((res)=>{
+            this.piloco = res.data
         })
     }
 }

@@ -4,6 +4,22 @@
         <p>name : {{user.name}}</p>
         <p>email : {{user.email}}</p>
         <button class="btn btn-danger" @click.prevent="logout">Logout</button>
+
+        <br>
+        <input :placeholder="'Chercher par '+ category" type="text" v-model="filter">
+        <span v-if="filter && filteredList.length >= 1">
+            {{filteredList.length}} phrase<span v-if="filteredList.length > 1">s</span> trouvée<span v-if="filteredList.length > 1">s</span>
+        </span>
+        <span v-if="filter && filteredList.length == 0">
+            Aucune phrase trouvée
+        </span>
+
+        <select v-model="category" id="">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="mode">mode</option>
+            <option value="phrase">phrase</option>
+        </select>
+
          <table class="table">
             <thead>
             <tr>
@@ -15,15 +31,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="piloco in pilocos" :key="piloco.id">
+            <tr v-for="piloco in filteredList" :key="piloco.id">
                 <td>{{ piloco.id }}</td>
                 <td>{{ piloco.mode }}</td>
                 <td>{{ piloco.name }}</td>
                 <td>{{ piloco.verre }}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <router-link :to="{name: 'EditPicolo', params: { id: piloco.id }}" class="btn btn-success">Edit</router-link>
-                        <button class="btn btn-danger" @click="deletePicolo(piloco.id)">Delete</button>
+                        <router-link :to="{name: 'EditPiloco', params: { id: piloco.id }}" class="btn btn-success">Edit</router-link>
+                        <button class="btn btn-danger" @click="deletePiloco(piloco.id)">Delete</button>
                     </div>
                 </td>
             </tr>
@@ -38,7 +54,9 @@ export default {
     data(){
         return{
             user: { type: Object, default: () => ({}) },
-            pilocos: []
+            pilocos: [],
+            filter: '',
+            category: ''
         }
     },
     created() {
@@ -48,6 +66,22 @@ export default {
                 this.pilocos = response.data;
             });
     },
+    computed: {
+        filteredList(){
+            return this.pilocos.filter((piloco) => {
+                if(this.category === 'mode'){
+                    return piloco.mode.toLowerCase().includes(this.filter.toLowerCase());
+                }
+                if(this.category === 'phrase'){
+                    return piloco.name.toLowerCase().includes(this.filter.toLowerCase());
+                }
+                else{
+                     return piloco.name.toLowerCase().includes(this.filter.toLowerCase());
+                }
+            })
+        },
+
+    },
 
     methods:{
         logout(){
@@ -55,11 +89,11 @@ export default {
                 this.$router.push({ name: 'Home'})
             })
         },
-        deletePicolo(id){
-            axios.delete(`/api/otter/delete/${id}`)
+        deletePiloco(id){
+            axios.delete(`/api/piloco/delete/${id}`)
                     .then(response => {
-                        let i = this.otters.map(data => data.id).indexOf(id);
-                        this.otters.splice(i, 1)
+                        let i = this.pilocos.map(data => data.id).indexOf(id);
+                        this.pilocos.splice(i, 1)
                     });
         }
     },

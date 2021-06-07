@@ -1880,6 +1880,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1889,7 +1905,9 @@ __webpack_require__.r(__webpack_exports__);
           return {};
         }
       },
-      pilocos: []
+      pilocos: [],
+      filter: '',
+      category: ''
     };
   },
   created: function created() {
@@ -1899,33 +1917,112 @@ __webpack_require__.r(__webpack_exports__);
       _this.pilocos = response.data;
     });
   },
-  methods: {
-    logout: function logout() {
+  computed: {
+    filteredList: function filteredList() {
       var _this2 = this;
 
+      return this.pilocos.filter(function (piloco) {
+        if (_this2.category === 'mode') {
+          return piloco.mode.toLowerCase().includes(_this2.filter.toLowerCase());
+        }
+
+        if (_this2.category === 'phrase') {
+          return piloco.name.toLowerCase().includes(_this2.filter.toLowerCase());
+        } else {
+          return piloco.name.toLowerCase().includes(_this2.filter.toLowerCase());
+        }
+      });
+    }
+  },
+  methods: {
+    logout: function logout() {
+      var _this3 = this;
+
       axios.post('/api/logout').then(function () {
-        _this2.$router.push({
+        _this3.$router.push({
           name: 'Home'
         });
       });
     },
-    deletePicolo: function deletePicolo(id) {
-      var _this3 = this;
+    deletePiloco: function deletePiloco(id) {
+      var _this4 = this;
 
-      axios["delete"]("/api/otter/delete/".concat(id)).then(function (response) {
-        var i = _this3.otters.map(function (data) {
+      axios["delete"]("/api/piloco/delete/".concat(id)).then(function (response) {
+        var i = _this4.pilocos.map(function (data) {
           return data.id;
         }).indexOf(id);
 
-        _this3.otters.splice(i, 1);
+        _this4.pilocos.splice(i, 1);
       });
     }
   },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
 
     axios.get('/api/user').then(function (res) {
-      _this4.user = res.data;
+      _this5.user = res.data;
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditPiloco.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditPiloco.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      piloco: {}
+    };
+  },
+  methods: {
+    updatePiloco: function updatePiloco() {
+      var _this = this;
+
+      axios.post("/api/piloco/update/".concat(this.$route.params.id), this.piloco).then(function () {
+        _this.$router.push({
+          name: 'Dashboard'
+        });
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
+      });
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    axios.get("/api/piloco/edit/".concat(this.$route.params.id)).then(function (res) {
+      _this2.piloco = res.data;
     });
   }
 });
@@ -2204,11 +2301,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Login_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Login.vue */ "./resources/js/components/Login.vue");
 /* harmony import */ var _components_Dashboard_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue");
 /* harmony import */ var _components_NewPiloco_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/NewPiloco.vue */ "./resources/js/components/NewPiloco.vue");
+/* harmony import */ var _components_EditPiloco_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/EditPiloco.vue */ "./resources/js/components/EditPiloco.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_1__.default);
+
 
 
 
@@ -2248,6 +2347,10 @@ var routes = [{
   path: '/new-piloco',
   component: _components_NewPiloco_vue__WEBPACK_IMPORTED_MODULE_7__.default,
   name: 'NewPiloco'
+}, {
+  path: '/edit-piloco/:id',
+  component: _components_EditPiloco_vue__WEBPACK_IMPORTED_MODULE_8__.default,
+  name: 'EditPiloco'
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__.default({
   routes: routes
@@ -37725,6 +37828,45 @@ component.options.__file = "resources/js/components/Dashboard.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/EditPiloco.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/EditPiloco.vue ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EditPiloco_vue_vue_type_template_id_0bda0cfd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditPiloco.vue?vue&type=template&id=0bda0cfd& */ "./resources/js/components/EditPiloco.vue?vue&type=template&id=0bda0cfd&");
+/* harmony import */ var _EditPiloco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditPiloco.vue?vue&type=script&lang=js& */ "./resources/js/components/EditPiloco.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _EditPiloco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _EditPiloco_vue_vue_type_template_id_0bda0cfd___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EditPiloco_vue_vue_type_template_id_0bda0cfd___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditPiloco.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Home.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/Home.vue ***!
@@ -37936,6 +38078,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/EditPiloco.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/EditPiloco.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditPiloco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditPiloco.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditPiloco.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditPiloco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Home.vue?vue&type=script&lang=js&":
 /*!*******************************************************************!*\
   !*** ./resources/js/components/Home.vue?vue&type=script&lang=js& ***!
@@ -38029,6 +38187,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_040e2ab9___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_040e2ab9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Dashboard.vue?vue&type=template&id=040e2ab9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dashboard.vue?vue&type=template&id=040e2ab9&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EditPiloco.vue?vue&type=template&id=0bda0cfd&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/EditPiloco.vue?vue&type=template&id=0bda0cfd& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditPiloco_vue_vue_type_template_id_0bda0cfd___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditPiloco_vue_vue_type_template_id_0bda0cfd___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditPiloco_vue_vue_type_template_id_0bda0cfd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditPiloco.vue?vue&type=template&id=0bda0cfd& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditPiloco.vue?vue&type=template&id=0bda0cfd&");
 
 
 /***/ }),
@@ -38158,12 +38333,91 @@ var render = function() {
         [_vm._v("Logout")]
       ),
       _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.filter,
+            expression: "filter"
+          }
+        ],
+        attrs: { placeholder: "Chercher par " + _vm.category, type: "text" },
+        domProps: { value: _vm.filter },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.filter = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _vm.filter && _vm.filteredList.length >= 1
+        ? _c("span", [
+            _vm._v(
+              "\n          " + _vm._s(_vm.filteredList.length) + " phrase"
+            ),
+            _vm.filteredList.length > 1 ? _c("span", [_vm._v("s")]) : _vm._e(),
+            _vm._v(" trouvée"),
+            _vm.filteredList.length > 1 ? _c("span", [_vm._v("s")]) : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.filter && _vm.filteredList.length == 0
+        ? _c("span", [_vm._v("\n          Aucune phrase trouvée\n      ")])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.category,
+              expression: "category"
+            }
+          ],
+          attrs: { id: "" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.category = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c(
+            "option",
+            { attrs: { value: "", selected: "", disabled: "", hidden: "" } },
+            [_vm._v("Choose here")]
+          ),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "mode" } }, [_vm._v("mode")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "phrase" } }, [_vm._v("phrase")])
+        ]
+      ),
+      _vm._v(" "),
       _c("table", { staticClass: "table" }, [
         _vm._m(0),
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.pilocos, function(piloco) {
+          _vm._l(_vm.filteredList, function(piloco) {
             return _c("tr", { key: piloco.id }, [
               _c("td", [_vm._v(_vm._s(piloco.id))]),
               _vm._v(" "),
@@ -38183,7 +38437,7 @@ var render = function() {
                       {
                         staticClass: "btn btn-success",
                         attrs: {
-                          to: { name: "EditPicolo", params: { id: piloco.id } }
+                          to: { name: "EditPiloco", params: { id: piloco.id } }
                         }
                       },
                       [_vm._v("Edit")]
@@ -38195,7 +38449,7 @@ var render = function() {
                         staticClass: "btn btn-danger",
                         on: {
                           click: function($event) {
-                            return _vm.deletePicolo(piloco.id)
+                            return _vm.deletePiloco(piloco.id)
                           }
                         }
                       },
@@ -38238,6 +38492,129 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditPiloco.vue?vue&type=template&id=0bda0cfd&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditPiloco.vue?vue&type=template&id=0bda0cfd& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "auth-container" }, [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.updatePiloco.apply(null, arguments)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "mode" } }, [_vm._v("mode")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.piloco.mode,
+                expression: "piloco.mode"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "mode" },
+            domProps: { value: _vm.piloco.mode },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.piloco, "mode", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Phrase")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.piloco.name,
+                expression: "piloco.name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "name" },
+            domProps: { value: _vm.piloco.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.piloco, "name", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "verre" } }, [
+            _vm._v("Nombre de gorgées")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.piloco.verre,
+                expression: "piloco.verre"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "verre" },
+            domProps: { value: _vm.piloco.verre },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.piloco, "verre", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", value: "Creer la loutre" }
+        })
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38505,7 +38882,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "name" } }, [_vm._v("name")]),
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Phrase")]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -38531,7 +38908,9 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "verre" } }, [_vm._v("verre")]),
+          _c("label", { attrs: { for: "verre" } }, [
+            _vm._v("Nombre de gorgées")
+          ]),
           _vm._v(" "),
           _c("input", {
             directives: [

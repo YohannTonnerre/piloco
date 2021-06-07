@@ -13,6 +13,7 @@ import Register from './components/Register.vue';
 import Login from './components/Login.vue';
 import Dashboard from './components/Dashboard.vue';
 import NewPiloco from './components/NewPiloco.vue';
+import EditPiloco from './components/EditPiloco.vue';
 
 
 
@@ -54,6 +55,11 @@ const routes = [
         path: '/new-piloco',
         component: NewPiloco,
         name: 'NewPiloco'
+    },
+    {
+        path: '/edit-piloco/:id',
+        component: EditPiloco,
+        name: 'EditPiloco'
     },
     
 ]

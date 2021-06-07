@@ -66,7 +66,8 @@ class PilocoCrudController extends Controller
      */
     public function edit($id)
     {
-        //
+        $piloco = Piloco::find($id);
+        return response()->json($piloco);
     }
 
     /**
@@ -78,7 +79,10 @@ class PilocoCrudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $piloco = Piloco::find($id);
+        $piloco->update($request->all());
+
+        return response()->json('piloco updated!');
     }
 
     /**
@@ -89,6 +93,9 @@ class PilocoCrudController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $piloco = Piloco::find($id);
+        $piloco->delete();
+
+        return response()->json('piloco deleted!');
     }
 }

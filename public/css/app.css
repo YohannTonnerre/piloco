@@ -10042,8 +10042,8 @@ h3 {
   width: 200vw;
   height: auto;
   bottom: -30vh;
-  -webkit-animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite alternate;
-          animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite alternate;
+  -webkit-animation: wave 15s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite alternate;
+          animation: wave 15s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite alternate;
   transform: translate3d(0, 0, 0);
 }
 
@@ -10052,7 +10052,7 @@ h3 {
     margin-left: 0;
   }
   100% {
-    margin-left: -1600px;
+    margin-left: -100%;
   }
 }
 
@@ -10061,7 +10061,7 @@ h3 {
     margin-left: 0;
   }
   100% {
-    margin-left: -1600px;
+    margin-left: -100%;
   }
 }
 .auth-container {
